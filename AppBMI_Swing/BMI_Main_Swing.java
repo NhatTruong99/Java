@@ -17,6 +17,7 @@ import javax.swing.border.TitledBorder;
 
 import javax.swing.border.EtchedBorder;
 import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 
 public class BMI_Main_Swing {
 
@@ -26,6 +27,7 @@ public class BMI_Main_Swing {
 	private JTextField txtBMI;
 	private JLabel lbDanhgia;
 	private JTextField txtDanhgia;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -64,23 +66,23 @@ public class BMI_Main_Swing {
 		lbTitle.setBounds(132, 10, 306, 57);
 		frame.getContentPane().add(lbTitle);
 		
-		JLabel lbChieucao = new JLabel("Chiều cao");
+		JLabel lbChieucao = new JLabel("Chiều cao (m)");
 		lbChieucao.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lbChieucao.setBounds(40, 89, 77, 27);
+		lbChieucao.setBounds(31, 89, 100, 27);
 		frame.getContentPane().add(lbChieucao);
 		
 		txtChieucao = new JTextField();
-		txtChieucao.setBounds(127, 91, 168, 27);
+		txtChieucao.setBounds(141, 91, 168, 27);
 		frame.getContentPane().add(txtChieucao);
 		txtChieucao.setColumns(10);
 		
-		JLabel lbCannang = new JLabel("Cân nặng");
+		JLabel lbCannang = new JLabel("Cân nặng (kg)");
 		lbCannang.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lbCannang.setBounds(40, 138, 77, 27);
+		lbCannang.setBounds(31, 138, 100, 27);
 		frame.getContentPane().add(lbCannang);
 		
 		txtCannang = new JTextField();
-		txtCannang.setBounds(127, 140, 168, 27);
+		txtCannang.setBounds(141, 140, 168, 27);
 		frame.getContentPane().add(txtCannang);
 		txtCannang.setColumns(10);
 		
@@ -91,11 +93,14 @@ public class BMI_Main_Swing {
 		pannelRegion.setLayout(null);
 		
 		JRadioButton radAsian = new JRadioButton("Asian");
+		buttonGroup.add(radAsian);
 		radAsian.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		radAsian.setBounds(24, 36, 103, 21);
 		pannelRegion.add(radAsian);
+		radAsian.setSelected(true);
 		
 		JRadioButton radNonAsian = new JRadioButton("Non Asian");
+		buttonGroup.add(radNonAsian);
 		radNonAsian.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		radNonAsian.setBounds(24, 72, 103, 21);
 		pannelRegion.add(radNonAsian);
@@ -116,59 +121,71 @@ public class BMI_Main_Swing {
 				double weight = Double.parseDouble(strWeight);
 				double BMIValue = weight / (height * height);
 			    String result = "";
-			    //kiểm tra radio asian
-				boolean isAsian = false;
-				if (radAsian.isSelected()) {
-					isAsian = true;
-					radNonAsian.setEnabled(true);
-				} else {
-					isAsian = false;
-					radNonAsian.setEnabled(true);
-				}
-				if (BMIValue < 18.5) {
-					result = "Bạn là người gầy";
-			    } else if (BMIValue < 25) { //(18.5 - 24.9)
-			    	result = "Bạn là người bình thường";
-				    } 
-			    	else if (BMIValue < 30) {  //(25.0 - 29.9)
-			    		result = "Bạn bị thừa cân";
-					    } 
-			    		else if (BMIValue < 35) { //(30.0 - 34.9)
-			    			result = "Bạn bị béo phì độ I";
-						    }
-			    			else if (BMIValue < 40) { //(35.0 - 39.9)
-			    				result = "Bạn bị béo phì độ II";
+			    //kiểm tra radio asian vs nonAsian
+			    if (radAsian.isSelected()) { // trường hợp asian 
+			    	if (BMIValue < 18.5) {
+						result = "Bạn là người gầy";
+				    } else if (BMIValue < 23) { //(18.5 - 22.9)
+				    	result = "Bạn là người bình thường";
+					    } else if (BMIValue < 25 ) { //23 - 24.9
+					    	result = "Bạn bị thừa cân";
+						    } 
+					    	else if (BMIValue < 30) {  //(25.0 - 29.9)
+					    		result = "Bạn bị béo phì";
 							    } 
-			    				else { //(>40)
-			    					result = "Bạn bị béo phì độ III";
+					    		else if (BMIValue <= 40) { //(30.0 - 40)
+					    			result = "Bạn bị béo phì độ I";
+								    }
+					    			else if (BMIValue < 50) { //(40.1 - 50)
+					    				result = "Bạn bị béo phì độ II";
+									    } 
+					    				else { //(>50)
+					    					result = "Bạn bị béo phì độ II (quá mức)";
+									    }
+				    	
+			    }
+			    if (radNonAsian.isSelected()) { // trường hợp non asian 
+			    	if (BMIValue < 18.5) {
+						result = "Bạn là người gầy";
+				    } else if (BMIValue < 25) { //(18.5 - 24.9)
+				    	result = "Bạn là người bình thường";
+					    } else if (BMIValue < 30 ) { //(25 - 29.9)
+					    	result = "Bạn bị thừa cân";
+						    } 
+				    		else if (BMIValue <= 40) { //(30.0 - 40)
+				    			result = "Bạn bị béo phì độ I";
 							    }
+				    			else if (BMIValue < 50) { //(40.1 - 50)
+				    				result = "Bạn bị béo phì độ II";
+								    } 
+				    				else { //(>50)
+				    					result = "Bạn bị béo phì độ II (quá mức)";
+								    }
+				    	
+			    }
 				txtBMI.setText(String.valueOf(BMIValue));
-				if (isAsian) {
-					txtDanhgia.setText(String.valueOf(result) + "Asian");
-				} else {
-					txtDanhgia.setText(String.valueOf(result) + "NonAsian");
-				}
+				txtDanhgia.setText(String.valueOf(result));
 
 			}
 		});
 		
 		JLabel lbBMI = new JLabel("Chỉ số BMI");
 		lbBMI.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lbBMI.setBounds(41, 252, 87, 22);
+		lbBMI.setBounds(31, 247, 87, 22);
 		frame.getContentPane().add(lbBMI);
 		
 		txtBMI = new JTextField();
-		txtBMI.setBounds(127, 247, 406, 27);
+		txtBMI.setBounds(141, 241, 406, 27);
 		frame.getContentPane().add(txtBMI);
 		txtBMI.setColumns(10);
 		
 		lbDanhgia = new JLabel("Đánh giá");
 		lbDanhgia.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lbDanhgia.setBounds(40, 290, 87, 27);
+		lbDanhgia.setBounds(31, 290, 87, 27);
 		frame.getContentPane().add(lbDanhgia);
 		
 		txtDanhgia = new JTextField();
-		txtDanhgia.setBounds(127, 292, 406, 27);
+		txtDanhgia.setBounds(141, 292, 406, 27);
 		frame.getContentPane().add(txtDanhgia);
 		txtDanhgia.setColumns(10);
 	}
