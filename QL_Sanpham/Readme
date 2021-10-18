@@ -1,0 +1,11 @@
+
+[11/10] Bài tập về nhà ArrayList #1
+- Xây dựng Lớp SanPham gồm các thuộc tính (MaSP, TenSP, DonGia), và các getter/setter tương ứng, các constructor có và không có tham số
+
+- Xây dựng ứng dụng có sử dụng GUI để thực hiện thêm mới các Sản phẩm, Tìm sản phẩm theo mã, Xóa SP theo mã, sửa tên SP theo mã, và Hiện danh sách các sản phẩm ra một điều khiển TextArea (mỗi dòng là thông tin một sản phẩm, theo định dạng sau:   
+
+Mã SP1 --- Tên Sản phẩm 1--- Đơn giá 1
+Mã SP2 --- Tên Sản phẩm 2--- Đơn giá 2
+Mã SP3 --- Tên Sản phẩm 3--- Đơn giá 3 
+
+ Chú ý: Khi thêm mới, cần kiểm tra xem SP đã có hay chưa (thông của việc kiểm tra mã) 
