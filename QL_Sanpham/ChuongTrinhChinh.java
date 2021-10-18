@@ -221,7 +221,7 @@ public class ChuongTrinhChinh {
 		} else {
 			//Kiểm tra mã có tồn tại trước khi nhập
 			for(int i=0; i<dsSanPham.size(); i++) {
-				if (maSP.equalsIgnoreCase(dsSanPham.get(i).getMaSP())){
+				if (maSP.equals(dsSanPham.get(i).getMaSP())){
 					ktTrungLap = true;
 				}
 			}
@@ -258,7 +258,7 @@ public class ChuongTrinhChinh {
 		Boolean isTimkiem = false;
 		int vitri = 0;
 		for(int i=0; i< dsSanPham.size(); i++) {
-			if (maSP.equalsIgnoreCase(dsSanPham.get(i).getMaSP())) {
+			if (maSP.equals(dsSanPham.get(i).getMaSP())) {
 				isTimkiem = true;
 				vitri = i;
 				break;
@@ -279,7 +279,7 @@ public class ChuongTrinhChinh {
 		// TODO Auto-generated method stub
 		String maSP = txtMaSP.getText();
 		for(int i=0; i< dsSanPham.size(); i++) {
-			if (maSP.equalsIgnoreCase(dsSanPham.get(i).getMaSP())) {
+			if (maSP.equals(dsSanPham.get(i).getMaSP())) {
 				//Nếu có dữ liệu nhập vào thì mới sửa thông tin
 				String tenSP = txtTenSP.getText();
 				if (!tenSP.isEmpty()) {
@@ -301,7 +301,7 @@ public class ChuongTrinhChinh {
 		// TODO Auto-generated method stub
 		String maSP = txtMaSP.getText();
 		for(int i=0; i< dsSanPham.size(); i++) {
-			if(maSP.equalsIgnoreCase(dsSanPham.get(i).getMaSP())) {
+			if(maSP.equals(dsSanPham.get(i).getMaSP())) {
 				dsSanPham.remove(i);
 				lbTrangThai.setText("Đã xóa thành công!");
 				break;
